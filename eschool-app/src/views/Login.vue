@@ -4,12 +4,6 @@
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4">
-            <v-alert :value="isLoginError" type="error">
-              Confirm ID and password!
-            </v-alert>
-            <v-alert :value="isLogin" type="success">
-              Login successful!
-            </v-alert>
             <v-card class="elevation-12">
               <v-toolbar color="primary" dark flat>
                 <v-toolbar-title>Login form</v-toolbar-title>
@@ -45,21 +39,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn
-                  large
-                  depressed
-                  color="primary"
-                  @click="
-                    login({
-                      email,
-                      password,
-                    })
-                  "
-                  >Login</v-btn
-                >
-                <v-spacer></v-spacer>
-                <!-- <v-btn @click="test">test</v-btn>
-                <v-btn @click="postTest">postTest</v-btn> -->
+                <v-btn large block depressed color="primary">Login</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -70,50 +50,19 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-
 export default {
   data() {
     return {
       email: null,
       password: null,
+      allUsers: [
+        { id: 1, name: "hoza", email: "hoza@gmail.com", password: "123456" },
+        { id: 2, name: "test", email: "test@gmail.com", password: "123456" },
+      ],
     };
   },
-  computed: {
-    ...mapState(["isLogin", "isLoginError"]),
-  },
-  methods: {
-    ...mapActions(["login"]),
-
-    // test() {
-    //   axios
-    //     .get("https://reqres.in/api/users?page=2")
-    //     .then(function(response) {
-    //       // handle success
-    //       console.log(response);
-    //     })
-    //     .catch(function(error) {
-    //       // handle error
-    //       console.log(error);
-    //     })
-    //     .then(function() {
-    //       console.log("test");
-    //       // always executed
-    //     });
-    // },
-    // postTest() {
-    //   axios
-    //     .post("https://reqres.in/api/login", {
-    //       email: "eve.holt@reqres.in",
-    //       password: "cityslicka",
-    //     })
-    //     .then((res) => {
-    //       console.log(res);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // },
+  props: {
+    source: String,
   },
 };
 </script>
