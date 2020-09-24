@@ -17,8 +17,12 @@ protocol.registerSchemesAsPrivileged([
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 265,
+    height: 78,
+    frame: false,
+    // transparent: true,
+    alwaysOnTop: true,
+    resizable: false,
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -30,6 +34,8 @@ function createWindow() {
     width: 412,
     height: 445,
     // frame: false,
+    resizable: true,
+    // transparent: true,
     focusable: true,
     // alwaysOnTop: true,
   });
@@ -44,7 +50,7 @@ function createWindow() {
     createProtocol("app");
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
-    loginWindow.loadURL("app://./login.html");
+    loginWindow.loadURL("app://./login/");
   }
 
   win.on("closed", () => {

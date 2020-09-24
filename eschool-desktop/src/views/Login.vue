@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="loginTemplate">
     <v-main>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
