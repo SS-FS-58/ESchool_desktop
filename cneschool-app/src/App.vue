@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <MainMenu msg="Welcome to Your Vue.js App" />
+    <MainMenu msg="test" />
   </div>
 </template>
 <script>
