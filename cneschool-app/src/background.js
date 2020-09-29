@@ -19,10 +19,10 @@ function createWindow() {
   mainMenuWindow = new BrowserWindow({
     width: 265,
     height: 78,
-    frame: false,
+    // frame: false,
     // transparent: true,
     alwaysOnTop: true,
-    resizable: false,
+    // resizable: false,
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -35,23 +35,34 @@ function createWindow() {
     height: 445,
     // frame: false,
     resizable: true,
-    // transparent: true,
+    transparent: true,
     focusable: true,
-    // alwaysOnTop: true,
+    alwaysOnTop: true,
+    webPreferences: {
+      webSecurity: false
+    },
+         Parent: mainMenuWindow // mainWindow is the main window
+
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     mainMenuWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
+    loginWindow.loadURL(`http://localhost:8080/#/about/`);
+    // console.log(process.env.WEBPACK_DEV_SERVER_URL);
     if (!process.env.IS_TEST) mainMenuWindow.webContents.openDevTools();
   } else {
     createProtocol("app");
     // Load the index.html when not in development
     mainMenuWindow.loadURL("app://./index.html");
+    // loginWindow.loadURL("app://./login/");
   }
 
   mainMenuWindow.on("closed", () => {
     mainMenuWindow = null;
+  });
+  loginWindow.on("closed", () => {
+    loginWindow = null;
   });
 }
 

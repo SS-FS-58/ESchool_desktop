@@ -10,7 +10,7 @@ const routes = [
     name: "MainMenu",
     component: MainMenu,
   },
-  {
+  {                     
     path: "/about",
     name: "About",
     // route level code-splitting
