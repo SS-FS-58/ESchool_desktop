@@ -4,74 +4,41 @@ import { app, protocol, BrowserWindow } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 const isDevelopment = process.env.NODE_ENV !== 'production'
-// const { ipcMain } = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-let mainMenuWindow
-// global.vuexState = null
+let win
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
 
-// ipcMain.on('vuex-state', (e, state) =>{
-//   global.vuexState = state
-//   console.log(global.vuexState)
-// })
-
 function createWindow() {
-   // Create the browser window.
-   mainMenuWindow = new BrowserWindow({
-    width: 265,
-    height: 78,
-    // frame: false,
-    // transparent: true,
-    alwaysOnTop: true,
-    // resizable: false,
-    webPreferences: {               
+  // Create the browser window.
+  win = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-    },
-  });
-
-  /// Create login windows
-  loginWindow = new BrowserWindow({
-    width: 412,
-    height: 445,
-    // frame: false,
-    resizable: true,
-    transparent: true,
-    focusable: true,
-    alwaysOnTop: true,
-    // show:false,
-    webPreferences: {
-      webSecurity: false
-    },
-         Parent: mainMenuWindow // mainWindow is the main window
-
-  });
-  loginWindow.loadURL('app://./index.html');
+      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION
+    }
+  })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
-    mainMenuWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-    loginWindow.loadURL(`http://localhost:8080/#/about/`);
-    if (!process.env.IS_TEST) mainMenuWindow.webContents.openDevTools()
+    win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
+    if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
     createProtocol('app')
     // Load the index.html when not in development
-    mainMenuWindow.loadURL('app://./index.html')
+    win.loadURL('app://./index.html')
   }
 
-  mainMenuWindow.on('closed', () => {
-    mainMenuWindow = null
-  });
-  loginWindow.on("closed", () => {
-    loginWindow = null;
-  });
+  win.on('closed', () => {
+    win = null
+  })
 }
 
 // Quit when all windows are closed.
@@ -86,7 +53,7 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (mainMenuWindow === null) {
+  if (win === null) {
     createWindow()
   }
 })
