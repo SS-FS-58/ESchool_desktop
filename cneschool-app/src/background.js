@@ -19,10 +19,10 @@ function createWindow() {
   mainMenuWindow = new BrowserWindow({
     width: 265,
     height: 78,
-    // frame: false,
+    frame: false,
     // transparent: true,
     alwaysOnTop: true,
-    // resizable: false,
+    resizable: false,
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -31,30 +31,33 @@ function createWindow() {
   });
   // Create login windows
   loginWindow = new BrowserWindow({
-    width: 412,
-    height: 445,
+    width: 1920,
+    height: 1040,
     // frame: false,
     resizable: true,
-    transparent: true,
-    focusable: true,
-    alwaysOnTop: true,
+    // transparent: true,
+    // focusable: true,
+    // alwaysOnTop: true,
+    icon: __dirname + '/icons/logo/jitsiLogo_square.ico',
     webPreferences: {
       webSecurity: false
     },
          Parent: mainMenuWindow // mainWindow is the main window
 
   });
+  loginWindow.removeMenu();
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     mainMenuWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
-    loginWindow.loadURL(`http://localhost:8080/#/about/`);
+    loginWindow.loadURL("http://47.111.233.60/login#/");
     // console.log(process.env.WEBPACK_DEV_SERVER_URL);
     if (!process.env.IS_TEST) mainMenuWindow.webContents.openDevTools();
   } else {
     createProtocol("app");
     // Load the index.html when not in development
     mainMenuWindow.loadURL("app://./index.html");
+    loginWindow.loadURL("http://47.111.233.60/login#/");
     // loginWindow.loadURL("app://./login/");
   }
 

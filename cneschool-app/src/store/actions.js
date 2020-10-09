@@ -12,7 +12,15 @@ const actions = {
   // /////////////////////////////////////////////
   // COMPONENTS
   // /////////////////////////////////////////////
+  login(){
+    // const {BrowserWindow} = require('electron').remote;
+    // let win = new BrowserWindow({width: 800, height: 600})
+    // win.loadURL('http://localhost:8080/#/about')
+    // console.log(require('electron').remote.getCurrentWindow())
+    console.log('login success');
+    // window.open('http://localhost:8080/#/', '_blank', 'nodeIntegration=no')
 
+  },
   // Vertical NavMenu
   updateVerticalNavMenuWidth ({ commit }, width) {
     commit('UPDATE_VERTICAL_NAV_MENU_WIDTH', width)
