@@ -38,7 +38,9 @@ function createWindow() {
     // transparent: true,
     // focusable: true,
     // alwaysOnTop: true,
-    icon: __dirname + '/icons/logo/jitsiLogo_square.ico',
+    minWidth: 800,
+    minHeight:600,
+    // icon: __dirname + '/icons/logo/jitsiLogo_square.ico',
     webPreferences: {
       webSecurity: false
     },
@@ -46,18 +48,20 @@ function createWindow() {
 
   });
   loginWindow.removeMenu();
-
+  loginWindow.once('ready-to-show', () => {
+    loginWindow.show();
+  });
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     mainMenuWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
-    loginWindow.loadURL("http://47.111.233.60/login#/");
+    loginWindow.loadURL("http://47.111.233.60/");
     // console.log(process.env.WEBPACK_DEV_SERVER_URL);
     if (!process.env.IS_TEST) mainMenuWindow.webContents.openDevTools();
   } else {
     createProtocol("app");
     // Load the index.html when not in development
     mainMenuWindow.loadURL("app://./index.html");
-    loginWindow.loadURL("http://47.111.233.60/login#/");
+    loginWindow.loadURL("http://47.111.233.60/");
     // loginWindow.loadURL("app://./login/");
   }
 
