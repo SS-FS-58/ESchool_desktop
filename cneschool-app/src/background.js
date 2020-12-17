@@ -16,19 +16,19 @@ protocol.registerSchemesAsPrivileged([
 
 function createWindow() {
   // Create the browser window.
-  mainMenuWindow = new BrowserWindow({
-    width: 265,
-    height: 78,
-    frame: false,
-    // transparent: true,
-    alwaysOnTop: true,
-    resizable: false,
-    webPreferences: {
-      // Use pluginOptions.nodeIntegration, leave this alone
-      // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
-    },
-  });
+  // mainMenuWindow = new BrowserWindow({
+  //   width: 265,
+  //   height: 78,
+  //   frame: false,
+  //   // transparent: true,
+  //   alwaysOnTop: true,
+  //   resizable: false,
+  //   webPreferences: {
+  //     // Use pluginOptions.nodeIntegration, leave this alone
+  //     // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
+  //     nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
+  //   },
+  // });
   // Create login windows
   loginWindow = new BrowserWindow({
     width: 1920,
@@ -53,21 +53,21 @@ function createWindow() {
   });
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
-    mainMenuWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
+    // mainMenuWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
     loginWindow.loadURL("http://47.111.233.60/");
     // console.log(process.env.WEBPACK_DEV_SERVER_URL);
     if (!process.env.IS_TEST) mainMenuWindow.webContents.openDevTools();
   } else {
     createProtocol("app");
     // Load the index.html when not in development
-    mainMenuWindow.loadURL("app://./index.html");
+    // mainMenuWindow.loadURL("app://./index.html");
     loginWindow.loadURL("http://47.111.233.60/");
     // loginWindow.loadURL("app://./login/");
   }
 
-  mainMenuWindow.on("closed", () => {
-    mainMenuWindow = null;
-  });
+  // mainMenuWindow.on("closed", () => {
+  //   mainMenuWindow = null;
+  // });
   loginWindow.on("closed", () => {
     loginWindow = null;
   });
@@ -85,7 +85,7 @@ app.on("window-all-closed", () => {
 app.on("activate", () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  if (win === null) {
+  if (mainMenuWindow === null) {
     createWindow();
   }
 });
