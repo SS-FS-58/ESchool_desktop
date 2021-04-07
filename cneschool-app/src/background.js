@@ -54,14 +54,14 @@ function createWindow() {
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     // mainMenuWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
-    loginWindow.loadURL("http://47.111.233.60/");
+    loginWindow.loadURL("http://8.131.231.180/");
     // console.log(process.env.WEBPACK_DEV_SERVER_URL);
     if (!process.env.IS_TEST) mainMenuWindow.webContents.openDevTools();
   } else {
     createProtocol("app");
     // Load the index.html when not in development
     // mainMenuWindow.loadURL("app://./index.html");
-    loginWindow.loadURL("http://47.111.233.60/");
+    loginWindow.loadURL("http://8.131.231.180/");
     // loginWindow.loadURL("app://./login/");
   }
 

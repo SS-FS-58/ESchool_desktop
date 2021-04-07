@@ -7,7 +7,7 @@ module.exports = {
       builderOptions: {
         appId: 'git.eschool.ele',
         nsis:{
-          shortcutName:'Eschool 1.0'
+          shortcutName:'Eschool 1.30'
         },
         win:{
           target:[
